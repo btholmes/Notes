@@ -1,0 +1,1 @@
+ANSWER ON MIGRATING MYSQL DATA TO FIREBASEhttp://stackoverflow.com/questions/18916172/migrating-data-into-firebase-from-mysqlIOS SWITF https://www.airpair.com/swift/building-swift-app-tutorialConnect MYSQL and IOS APP http://codewithchris.com/iphone-app-connect-to-mysql-database/Create IOS app withe Firebase https://www.appcoda.com/firebase/
