@@ -29,7 +29,7 @@
 
 	Create a bash script to make the github repository 
 		1. create script.sh inside a file called my_scripts on the Desktop with this \
-		        #!bin/bash
+		        \#!bin/bash
 		        curl -u 'UserName' https://api.github.com/user/repos -d "{\"name\":\"$1\"}";
 			git init;
 			git remote add origin https://github.com/btholmes/$1.git;
