@@ -1,0 +1,1 @@
+# SET UP CLAIRIFI STARTER IN INTELLI J 1. Run command ./gradlew clean build	If error for not having local.properties, create the local.properties file in top level and add this text to it 		* sdk.dir=/Users/btholmes/Library/Android/sdk
