@@ -2,22 +2,22 @@
 
 ## General
  * find location -name 'name.ext'
-	* mdfind string (will find all the files with text "string" in them)
-	* mdfind mysearch -onlyin "root locadtion" (Only looks in that one directory)
-	* mdfind -name FileName
-	 * find ~ -iname "value*" (Finds anything in home directory with word "value" in it)
-	 * find ~ -iname "value*" | more  (If lots of results) 
-	 * echo "string" >> README.md
-	 * nano ~/.Profile (Put your export path statements here) 
-	 * nano ~/Bashrc (Put alias here so you can use from command line) 
+ * mdfind string (will find all the files with text "string" in them)
+ * mdfind mysearch -onlyin "root locadtion" (Only looks in that one directory)
+ * mdfind -name FileName
+ * find ~ -iname "value*" (Finds anything in home directory with word "value" in it)
+ * find ~ -iname "value*" | more  (If lots of results) 
+ * echo "string" >> README.md
+ * nano ~/.Profile (Put your export path statements here) 
+ * nano ~/Bashrc (Put alias here so you can use from command line) 
 	 
 	
 ## Git Commands 
-	* git clone "name"
-	* git add . 
-	* git commit 
-	* git push (If you get error try)
-	* git push origin master 
+ * git clone "name"
+ * git add . 
+ * git commit 
+ * git push (If you get error try)
+ * git push origin master 
 	
 	To solve git status --porcelain failed in 'directory'
 		1. Have to delete all the .git files located in the 'directory'
