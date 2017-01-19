@@ -1,7 +1,7 @@
 # Useful Shell Commands / Working with GitHub
 
 ## General 
-	* find location -name 'name.ext'
+	*find location -name 'name.ext'
 	* mdfind string (will find all the files with text "string" in them)
 	* mdfind mysearch -onlyin "root locadtion" (Only looks in that one directory)
 	* mdfind -name FileName
