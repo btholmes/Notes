@@ -19,26 +19,26 @@
  * git push (If you get error try)
  * git push origin master 
 	
-	To solve git status --porcelain failed in 'directory'
-		1. Have to delete all the .git files located in the 'directory'
-		2. Run this command : 
-			*find . -name ".git*" -exec rm -R {} \;
+#### To solve git status --porcelain failed in 'directory'
+ 1. Have to delete all the .git files located in the 'directory'
+ 2. Run this command : 
+    * find . -name ".git*" -exec rm -R {} \;
 	
-	A blackened unclickable folder in Github represent an old repo that wasn't removed locally properly. 
-		1. git fetch
+#### A blackened unclickable folder in Github represent an old repo that wasn't removed locally properly. 
+ 1. git fetch
 
-	Create a bash script to make the github repository 
-		1. create script.sh inside a file called my_scripts on the Desktop with this \
-		        \#!bin/bash
+#### Create a bash script to make the github repository 
+ 1. create script.sh inside a file called my_scripts on the Desktop with this 
+  			#!bin/bash
 		        curl -u 'UserName' https://api.github.com/user/repos -d "{\"name\":\"$1\"}";
 			git init;
 			git remote add origin https://github.com/btholmes/$1.git;
 			
-		2. chmod 755 githubscript.sh
-		3. nano ~/.profile;
+ 2. chmod 755 githubscript.sh
+ 3. nano ~/.profile;
 			export PATH="$PATH:$HOME/Desktop/my_scripts" (to exit nano use)
 			ctrl x (Then answer yes about saving press enter )
-		3. also do nano ~/.Bashrc 
+ 4.  also do nano ~/.Bashrc 
 			alias githubrepo="bash githubscript.sh"
 		4. source ~/.bashrc ~/.profile; cd (to reload bash in termial) 
 		5. Then use command githubrepo nameOfRepository
