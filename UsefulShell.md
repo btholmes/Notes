@@ -82,4 +82,15 @@
  * git merge test
  * git push origin master
 	
+### Refusing to merge unrelated histories
+ * git pull origin branchName --allow-unrelated-histories
 	
+	
+### Generate Key for Login with Facebook 
+	- **OSX**
+	- keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64
+	- **Windows**
+	- keytool -exportcert -alias androiddebugkey -keystore %HOMEPATH%\.android\debug.keystore | openssl sha1 -binary | openssl base64
+	
+### Install Cordova Plugin for Facebook 
+	- ionic plugin add cordova-plugin-facebook4 --variable APP_ID="123456789" --variable APP_NAME="myApplication"
