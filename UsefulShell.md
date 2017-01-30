@@ -94,3 +94,7 @@
 	
 ### Install Cordova Plugin for Facebook 
 	- ionic plugin add cordova-plugin-facebook4 --variable APP_ID="123456789" --variable APP_NAME="myApplication"
+
+## To list all processes running 
+	ps -ax 
+	killall (kills all processes)
