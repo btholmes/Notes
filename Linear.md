@@ -7,3 +7,5 @@
     https://matrix.reshish.com/inverse.php
  * Trace calculator 
     http://calculator.vhex.net/calculator/linear-algebra/trace-of-a-matrix
+ * Minor and Cofactor calc 
+    https://www.easycalculation.com/matrix/cofactor-matrix.php
