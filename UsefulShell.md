@@ -18,6 +18,9 @@
  * git commit 
  * git push (If you get error try)
  * git push origin master 
+ * git stash 
+ * git stash pop 
+ 
 	
 
 #### To solve git status --porcelain failed in 'directory'
@@ -63,6 +66,14 @@
  * git push -u origin master
 	
 	
+## Setting up User login information for GITHUB 
+ * ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+ * eval "$(ssh-agent -s)"
+ * ssh-add -K ~/.ssh/id_rsa
+
+## Add images to README 
+ * ![Alt text](/relative/path/to/img.jpg?raw=true "Optional Title")
+
 	
 ## Generating SSH keys
  * Check if you have one already with cat ~/.ssh/id_rsa.pub
@@ -97,4 +108,21 @@
 
 ## To list all processes running 
 	ps -ax 
+    lsof -i tcp:3000 
 	killall (kills all processes)
+
+## Find if port is in use 
+
+    sudo lsof -i TCP:$PORT | grep LISTEN (replace $port with port number)
+
+## For Angular2 error with cannot find hmr 
+
+    sudo npm install @angularclass/hmr @angularclass/hmr-loader
+
+## USE sftp to copy file from local to server
+
+    sftp usrname@orgname.edu
+    Enter password
+    cd <directory where you want to transfer the file>
+    put <name of file you want to transfer>
+    
