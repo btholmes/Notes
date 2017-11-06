@@ -126,3 +126,13 @@
     cd <directory where you want to transfer the file>
     put <name of file you want to transfer>
     
+    
+## Make Android Studio Run Faster 
+
+	Add this to gradle properties 
+	org.gradle.daemon=true
+	
+	Android -> Preferences -> Build, Execution, Deployment -> Compiler
+	Check the Option -
+	Compile independent modules in parallel (may require larger heap size)
+	Set VM Options to :  -Xmx2048m -XX:MaxPermSize=512
