@@ -1,5 +1,44 @@
 # Useful Shell Commands / Working with GitHub
 
+# Add Useful Plugins to Android Studio or Any IntelliJ app on Mac
+ * Plugins are stored in the following locations the first one works for me, just put plugin in latest version of Android Studio
+    ~/Library/Application Support/Android Studio/
+    /Applications/Application Support/Android Studio .app/contents/plugins
+ * Below didn't work for me
+    /Applications/Android Studio.app/Contents/plugins/android/lib/templates
+ * So just copy plugins from IntelliJ community version, which can also be found at the same relative location, and paste them into those locations
+
+# Set Up Firebase Cloud Functions
+ * First set up Firebase CLI
+    brew install node
+    node -v
+    npm -v
+    npm install -g firebase-tools
+ * For some reason after everything, it only worked if alias was set 
+    alias firebase= npm config get prefix '/bin/firebase'
+ * Configure firebase with 
+    firebase login 
+ * Set up my firebase project to handle the events
+    firebase use --add 
+    - Then select your project from the list
+
+# Set Up Firebase Cloud Functions Shell
+    npm install --save firebase-functions@latest
+ * If you have a custom .runtimeconfig.json then run this first
+        firebase functions:config:get > .runtimeconfig.json
+ * Run below line, regardless of custom runtimeconfig
+        firebase experimental:functions:shell
+
+
+# Brew information
+ * Search 
+    brew search postgresql
+ * Swich to older version
+    brew switch homebrew/versions/postgresql8
+ * Or if 8 is not already installed in Brew cellar
+    brew install homebrew/versions/postgresql8
+ 
+
 ## General
  * find location -name 'name.ext'
  * mdfind string (will find all the files with text "string" in them)
@@ -21,6 +60,14 @@
  * git stash 
  * git stash pop 
  
+## Execute a command in all subdirectories of current directory
+        find . -maxdepth 1 -type d \( ! -name . \) -exec bash -c "cd '{}' && pwd" \;
+            The \( ! -name . \) avoids executing the command in current directory.
+
+ * Execute a mvn package to all sub directories in directory 
+
+        find . -maxdepth 1 -type d \( ! -name . \) -exec bash -c "cd '{}' && mvn package" \;
+
 	
 
 #### To solve git status --porcelain failed in 'directory'
@@ -130,9 +177,11 @@
 ## Make Android Studio Run Faster 
 
 	Add this to gradle properties 
-	org.gradle.daemon=true
+		org.gradle.daemon=true
 	
 	Android -> Preferences -> Build, Execution, Deployment -> Compiler
-	Check the Option -
-	Compile independent modules in parallel (may require larger heap size)
-	Set VM Options to :  -Xmx2048m -XX:MaxPermSize=512
+		Check the Option -
+		Compile independent modules in parallel (may require larger heap size)
+		
+	Set VM Options to :
+		  -Xmx2048m -XX:MaxPermSize=512
