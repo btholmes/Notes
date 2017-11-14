@@ -14,13 +14,46 @@
     node -v
     npm -v
     npm install -g firebase-tools
+ * Run PATH=/Users/btholmes/.node-modules/bin/firebase:$PATH
  * For some reason after everything, it only worked if alias was set 
-    alias firebase= npm config get prefix '/bin/firebase'
+    alias firebase= 'Users/btholmes/.npm-packages/bin/firebase'
  * Configure firebase with 
     firebase login 
  * Set up my firebase project to handle the events
     firebase use --add 
     - Then select your project from the list
+
+# Android, separate thread on main thread 
+
+public class Utils {
+
+public static void runOnUiThread(Runnable runnable){
+final Handler UIHandler = new Handler(Looper.getMainLooper());
+UIHandler .post(runnable);
+} 
+}
+
+Utils.runOnUiThread(new Runnable() {
+@Override
+public void run() {
+// UI updation related code.
+}
+});
+
+
+# Check Mac System specs 
+    system_profiler SPSoftwareDataType
+
+
+#Uninstall and Reinstall for Firebase CLI
+        rm -rf node_modules
+        npm uninstall -g firebase-tools
+        npm uninstall -g @google-cloud/functions-emulator
+        npm install -g firebase-tools
+        npm install --save firebase-functions
+        npm install
+        firebase serve --only functions --project XXX
+
 
 # Set Up Firebase Cloud Functions Shell
     npm install --save firebase-functions@latest
@@ -28,6 +61,10 @@
         firebase functions:config:get > .runtimeconfig.json
  * Run below line, regardless of custom runtimeconfig
         firebase experimental:functions:shell
+
+# Search Directories and files for a specific string 
+ * This will search every file in every directory
+    grep -lr "text to find" *
 
 
 # Brew information
