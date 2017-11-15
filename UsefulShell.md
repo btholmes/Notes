@@ -1,4 +1,4 @@
-# Useful Shell Commands / Working with GitHub
+# Useful Shell Commands
 
 # Add Useful Plugins to Android Studio or Any IntelliJ app on Mac
  * Plugins are stored in the following locations the first one works for me, just put plugin in latest version of Android Studio
@@ -67,6 +67,11 @@
 
 
 # Brew information
+ * Cellar is located in 
+    /usr/local/Cellar
+ * Switching from node v6 to v8 I had to run 
+    brew switch node 8.9.1
+    brew link --overwrite node
  * Search 
     brew search postgresql
  * Swich to older version
