@@ -25,20 +25,19 @@
 
 # Android, separate thread on main thread 
 
-public class Utils {
+        public class Utils {
+            public static void runOnUiThread(Runnable runnable){
+                final Handler UIHandler = new Handler(Looper.getMainLooper());
+                UIHandler .post(runnable);
+            } 
+        }
 
-public static void runOnUiThread(Runnable runnable){
-final Handler UIHandler = new Handler(Looper.getMainLooper());
-UIHandler .post(runnable);
-} 
-}
-
-Utils.runOnUiThread(new Runnable() {
-@Override
-public void run() {
-// UI updation related code.
-}
-});
+        Utils.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+            // UI updation related code.
+            }
+        });
 
 
 # Check Mac System specs 
