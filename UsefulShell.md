@@ -1,5 +1,56 @@
 # Useful Shell Commands
 
+
+# Verify Sha256 checksum 
+ * openssl dgst -sha256 path/to/file | 
+ grep -i -a developerchecksum
+
+# Verify Sha1 checksum 
+ * openssl sha1 /full/path/to/file
+
+# Verify md5 checksum, even though it is no longer recommended as a checksum 
+ * openssl md5 /full/path/to/file
+ 
+ 
+# Use grep to find all files containing a certain string 
+	
+		grep -rl "string" /directory
+		grep -i -a -v -r "<<<<.*" . 
+		
+# Use sed to replace lines matching regex pattern 
+
+		sed -i '' '/>>>>.*/d' file/path
+		sed '/>>>>.*/d' fild/path (This will just test in terminal, -i actually executes)
+ 
+
+# Create bootable Kali_Linux usb stick 
+ First open USB in Disk utility, Format as MS-DOS (Fat) w/ GUID Partition Map
+Next... 
+ * diskutil list 
+Unmount usb to verify the right one 
+ * diskutil unmountDisk /dev/disk6
+ * diskutil mountDisk /dev/disk6
+ 
+Image the Kali ISO file on the USB 
+ * sudo dd if=kali-linux-2017.1-amd64.iso of=/dev/disk6 bs=1m
+
+If you get a resource busy error just unmount the usb.
+
+# Get hardware info on mac
+ * system_profiler SPHardwareDataType
+ 
+# Create a disc image 
+	Move all the files to archive into the same folder.
+	Open Disk Utility, in the Utilities folder in Launchpad.
+	Choose File > New > “Disk Image from Folder.”
+	Choose the folder you want, and click Image.
+	Type a name for the disk image, and select where to save it.
+
+# Run NodeJS code in Atom
+	
+# List all variable names and their current value 
+	* printenv
+
 # Add Useful Plugins to Android Studio or Any IntelliJ app on Mac
  * Plugins are stored in the following locations the first one works for me, just put plugin in latest version of Android Studio
     ~/Library/Application Support/Android Studio/
@@ -15,13 +66,17 @@
     npm -v
     npm install -g firebase-tools
  * Run PATH=/Users/btholmes/.node-modules/bin/firebase:$PATH
+ * Configure gmail account and password 
+ 	    firebase functions:config:set gmail.email="myusername@gmail.com" gmail.password="secretpassword"
  * For some reason after everything, it only worked if alias was set 
-    alias firebase= 'Users/btholmes/.npm-packages/bin/firebase'
+    alias firebase='/Users/btholmes/.npm-packages/bin/firebase'
+ * firebase init
  * Configure firebase with 
     firebase login 
  * Set up my firebase project to handle the events
     firebase use --add 
     - Then select your project from the list
+ * firebase deploy 
 
 # Android, separate thread on main thread 
 
@@ -66,18 +121,42 @@
     grep -lr "text to find" *
 
 
+# Open Command Mac
+ * -a The -a option means "open the file argument with the named application":
+ 
+		 open -a TextWrangler file.txt
+
+ * -e The -e option means "open the file argument with the TextEdit application":
+
+		 open -e file.txt
+
+ * -t Open with the default application 
+
+ 		 open -t file.txt
+ 		
+# Change default text editor file from terminal 
+ * Add the following to your ~/.bashrc file:
+		 export EDITOR="/Applications/WhateverEditor.app/Contents/MacOS/TextEdit"
+ * or just type the following command into your Terminal:
+	   	 echo "export EDITOR=\"/Applications/TextEdit.app/Contents/MacOS/TextEdit\"" >> ~/.bashrc
+
+
 # Brew information
+Install Brew
+	* ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+Uninstall Brew
+	* ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
  * Cellar is located in 
-    /usr/local/Cellar
+    	 /usr/local/Cellar
  * Switching from node v6 to v8 I had to run 
-    brew switch node 8.9.1
-    brew link --overwrite node
+   		 brew switch node 8.9.1
+    	 brew link --overwrite node
  * Search 
-    brew search postgresql
+    	 brew search postgresql
  * Swich to older version
-    brew switch homebrew/versions/postgresql8
+    	 brew switch homebrew/versions/postgresql8
  * Or if 8 is not already installed in Brew cellar
-    brew install homebrew/versions/postgresql8
+    	 brew install homebrew/versions/postgresql8
  
 
 ## General
@@ -93,7 +172,9 @@
 	 
 	
 ## Git Commands 
- * git clone "name"
+ * Get the url of local git repo
+ 			git config --get remote.origin.url
+ * git clone "git_repo_url"
  * git add . 
  * git commit 
  * git push (If you get error try)
@@ -101,13 +182,18 @@
  * git stash 
  * git stash pop 
  
-## Execute a command in all subdirectories of current directory
+## (FIND CMD) Exececute a command in all subdirectories of current directory
+        
         find . -maxdepth 1 -type d \( ! -name . \) -exec bash -c "cd '{}' && pwd" \;
-            The \( ! -name . \) avoids executing the command in current directory.
+        The \( ! -name . \) avoids executing the command in current directory.
 
  * Execute a mvn package to all sub directories in directory 
 
         find . -maxdepth 1 -type d \( ! -name . \) -exec bash -c "cd '{}' && mvn package" \;
+        
+ * Remove all git files from directory
+        
+        find . -name "*.git" -exec {} rm -R \; 
 
 	
 
@@ -135,16 +221,17 @@
  2. chmod 755 githubscript.sh
  3. nano ~/.profile;
  
-			export PATH="$PATH:$HOME/Desktop/my_scripts" (to exit nano use)
+			export PATH="$PATH:$HOME/Desktop/my_scripts" 
+			(to exit nano use)
 			ctrl x (Then answer yes about saving press enter )
 			
- 4.  also do nano ~/.Bashrc 
+ 4.  also do nano ~/.bashrc 
 			alias githubrepo="bash githubscript.sh"
  5. source ~/.bashrc ~/.profile; cd (to reload bash in termial) 
  6. Then use command githubrepo nameOfRepository
 	
 # The Ultimate Method for creating a repository and pushing code to it 
- * githubrepo name (Now it's created on github) 
+ * githubrepo "name_for_repo" (Now it's created on github) 
  * mkdir where you want it 
  * switch into directory and run echo "# Website" >> README.md
  * git init 
@@ -186,18 +273,26 @@
 	
 	
 ### Generate Key for Login with Facebook 
-	- **OSX**
-	- keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64
-	- **Windows**
-	- keytool -exportcert -alias androiddebugkey -keystore %HOMEPATH%\.android\debug.keystore | openssl sha1 -binary | openssl base64
+	
+		**OSX**
+		keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64
+		**Windows**
+		keytool -exportcert -alias androiddebugkey -keystore %HOMEPATH%\.android\debug.keystore | openssl sha1 -binary | openssl base64
 	
 ### Install Cordova Plugin for Facebook 
-	- ionic plugin add cordova-plugin-facebook4 --variable APP_ID="123456789" --variable APP_NAME="myApplication"
+	
+		ionic plugin add cordova-plugin-facebook4 --variable APP_ID="123456789" --variable APP_NAME="myApplication"
 
 ## To list all processes running 
-	ps -ax 
-    lsof -i tcp:3000 
-	killall (kills all processes)
+	
+		ps -ax 
+   		lsof -i tcp:3000 
+		killall (kills all processes)
+	
+## Kill all non essential processes 
+	
+		kill -9 -1
+	
 
 ## Find if port is in use 
 
@@ -226,3 +321,102 @@
 		
 	Set VM Options to :
 		  -Xmx2048m -XX:MaxPermSize=512
+		  
+		  
+# Find wifi password Windows and Mac
+
+	* Windows 
+	  - Remember to replace labnol with the name of your Wireless SSID 
+	  (this is the name of the Wi-Fi network that you connect your computer to)
+		netsh wlan show profile name=labnol key=clear
+	* If you just wanna see the password and nothing else use 
+		netsh wlan show profile name=labnol key=clear | findstr Key
+		
+GET WIFI PASSWORDS WITH WINDOWS 
+	* netsh wlan show profiles 
+Then pick a profile and type this 
+	* netsh wlan show profiles profileName key=clear
+Password is shown at key content row
+		
+	* MAC 
+	 - replace labnol with your WiFi name
+	 security find-generic-password -wa labnol, then enter your Mac username and password 
+	 to access the OS X keychain and the Wi-FI network password would be displayed on the screen in plain text.
+	 
+	* security find-generic-password -wa labnol
+	
+
+# Find where java is installed on mac
+
+		/usr/libexec/java_home -v 1.
+	
+# Remove \r characters from a windows file to use on mac 
+
+		sed $'s/\r$//' ./install.sh > ./install.sh
+		
+		
+# Find available wifi networks from command line. 
+ * Make a symbolic link with 
+ 	sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/local/bin/airport
+ * airport -s 
+ * airport --getinfo
+ 
+# Join wifi network from command line 
+ * networksetup -setairportnetwork en0 WIFI_SSID_I_WANT_TO_JOIN WIFI_PASSWORD
+ - If you know the connections, you can write a script 
+ 				If you know the wifi connections name you can write a script to switch:
+ 				
+ 				
+ * networksetup -listallhardwareports  (Shows what type of connection it is, en0, en1 .. etc) 
+
+case "$1" in
+
+   wifi1)
+       printf "Switching to wifi1 ...\n"
+       networksetup -setairportnetwork en0 wifi1 password1
+       ;;
+
+   wifi2)
+       printf "Switching to wifi2 ...\n"
+       networksetup -setairportnetwork en0 wifi2 password2
+       ;;
+
+   *)
+       printf "Unknown wifi"
+       exit -1
+esac
+
+exit 0
+
+# See who is connected to your wifi 
+
+		arp -a
+ 
+ 
+ 
+ 
+# Android/adb command not recognized
+ * set up ~/.profile with 
+    export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"  (For adb)
+	export PATH="$PATH:$HOME/Library/Android/sdk/tools"   (For android) 
+	
+# If you delete gradle files from android studio project, you can reset using these steps 
+
+	1. Close the project in Android Studio (so it doesn't open the project automatically in later steps) 
+		and then close Android Studio
+	2. Clean the project (delete the ".idea" and "build" folders, .iml files, etc.) so you only have the source 
+		files remaining
+    3. Set up gradle by adding the appropriate settings.gradle and build.gradle files 
+    	(test your setup using the command line)
+	4. Open Android Studio and choose "Import project" and choose to use Gradle as the external model
+	5. Pick your settings.gradle file as the Gradle project
+	6. [Optional] Set your "Gradle home" folder (so the text turns black instead of gray). 
+		Earlier versions of Android Studio caused problems for me if I didn't do this. 
+		Make sure you use Gradle 0.1.10 or newer (earlier versions do not work with the current Gradle build tools).
+		
+		
+# See all wifi connection history on mac
+
+		defaults read /Library/Preferences/SystemConfiguration/com.apple.airport.preferences| sed 's|\./|`pwd`/|g' | sed 's|.plist||g'|grep 'LastConnected' -A 7
+
+
