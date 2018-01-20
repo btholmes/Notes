@@ -393,10 +393,24 @@ exit 0
 		arp -a
  
  
- 
+# Install aircrack 
+	
+		brew install aircrack-ng
+		
+# Crack WPA WPA2 pass
+
+		sudo ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/sbin/airport
+		sudo airport -s
+
+		sudo airport en1 sniff [CHANNEL]
+
+		//New Terminal Window
+		aircrack-ng -1 -a 1 -b [TARGET_MAC_ADDRESS] [CAP_FILE]
+		// Notes: the cap_file will be located in the /tmp/airportSniff*.cap.
  
 # Android/adb command not recognized
  * set up ~/.profile with 
+ 
     export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"  (For adb)
 	export PATH="$PATH:$HOME/Library/Android/sdk/tools"   (For android) 
 	
