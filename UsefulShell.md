@@ -1,6 +1,82 @@
 # Useful Shell Commands
 
 
+
+# Kali Linux Commands
+
+## *************************************************************************************************
+
+
+## PEN testing 
+ * download device driver for host
+ * add device filter in virtual box
+ * airmon-ng
+ * if it doesn't show download 
+ * https://www.youtube.com/redirect?v=6cCwsno-ty4&event=video_description&redir_token=g6WYwaKHJoDB_MUujqrktQsGkAh8MTUyMzkwOTA1MEAxNTIzODIyNjUw&q=http%3A%2F%2Flinuxwireless.sipsolutions.net%2Fdownload%2Fcompat-wireless-2.6%2Fcompat-wireless-2010-06-26-p.tar.bz2
+
+		  cd into it
+		  make unload 
+		  make load
+		  airmon-ng (Do you see it? ) 
+		  airmon-ng start wlan0
+		  airodump-ng wlan0mon
+		  airodump-ng -c [channel] --bssid [bssid] -w /root/Desktop/ [monitor interface] (airodump-ng -c 10 --bssid 00:14:BF:E0:E8:D5 -w /root/Desktop/ mon0)
+		  Leave airodump-ng running and open a second terminal. In this terminal, type this command: aireplay-ng –0 2 –a [router bssid] –c [client bssid] mon0
+		  	EX. aireplay-ng –0 2 –a 00:14:BF:E0:E8:D5 –c 4C:EB:42:59:DE:31 mon0
+ 		  Open a new Terminal. Type in this command: aircrack-ng -a2 -b [router bssid] -w [path to wordlist] /root/Desktop/*.cap
+
+
+ * Scan available networks 
+
+ 	sudo iwlist scan
+
+ * Get installed wireless card info 
+
+	lspci
+	lspci | grep -i wireless
+	lspci | egrep -i --color 'wifi|wlan|wireless'
+
+ * Get wireless card driver info 
+
+ 	lspci -vv -s 0c:00.0
+
+
+## *************************************************************************************************
+
+# Perl for string replacement, because sed with OSX is weird 
+ * perl -pi -w -e 's/SEARCH_FOR/REPLACE_WITH/g;' *.txt
+
+
+# GITHUB UPDATE STUFF
+ * find . -maxdepth 1 -type d \( ! -name . \) -exec bash -c "cd '{}' && perl -pi -w -e 's/You are/I am/g;' git.txt" \; 
+
+
+# Replace all instances of one string with another 
+## Note below options use sed... and sed isn't that great with mac.. now you know. 
+				The -type f is just good practice; sed will complain if you give it a directory or so. -exec is preferred over xargs; you needn't bother with -print0 or anything. The {} + at the end means that find will append all results as arguments to one instance of the called command, instead of re-running it for each result. (One exception is when the maximal number of command-line arguments allowed by the OS is breached; in that case find will run more than one instance.)
+  * find . -type f -name '*.txt' -exec sed -i '' s/this/that/ {} +
+  * find . -maxdepth 1 -type d \( ! -name . \) -exec bash -c "cd '{}' && echo 'I am a git update script' >> git.txt" \;
+
+
+# Exceucte Find and Sed together
+ * find . -name "*.java" -exec sed -i '' s/foo/bar/g {} +
+
+
+
+
+
+
+# Compare two directories 
+a treats all files as text, r recursively searched subdirectories, q reports 'briefly', only when files differ
+ * diff -arq folder1 folder2
+will do this, telling you both if any files have been added or deleted, and what's changed in the files that have been modified.
+ 	diff -r 
+ * Show files side by side, ignore white space and capitals
+ 	diff file1 file2 -iawy
+
+# Limit number of lines in output 
+	| head -n 10
+
 # Verify Sha256 checksum 
  * openssl dgst -sha256 path/to/file | 
  grep -i -a developerchecksum
@@ -65,11 +141,11 @@ If you get a resource busy error just unmount the usb.
     node -v
     npm -v
     npm install -g firebase-tools
- * Run PATH=/Users/btholmes/.node-modules/bin/firebase:$PATH
+ * Run PATH=/Users/myName/.node-modules/bin/firebase:$PATH
  * Configure gmail account and password 
  	    firebase functions:config:set gmail.email="myusername@gmail.com" gmail.password="secretpassword"
  * For some reason after everything, it only worked if alias was set 
-    alias firebase='/Users/btholmes/.npm-packages/bin/firebase'
+    alias firebase='/Users/myName/.npm-packages/bin/firebase'
  * firebase init
  * Configure firebase with 
     firebase login 
@@ -181,6 +257,17 @@ Uninstall Brew
  * git push origin master 
  * git stash 
  * git stash pop 
+
+ * git config --get remote.origin.url
+ * git config --global user.email
+
+# Delete everything from remote repo and replace with local directory 
+ * git push origin --delete master
+  	Or you could also do 
+  	* git push -f 
+
+Then create a master branch and push your new code .
+ 
  
 ## (FIND CMD) Exececute a command in all subdirectories of current directory
         
@@ -216,7 +303,7 @@ Uninstall Brew
   			#!bin/bash
 		        curl -u 'UserName' https://api.github.com/user/repos -d "{\"name\":\"$1\"}";
 			git init;
-			git remote add origin https://github.com/btholmes/$1.git;
+			git remote add origin https://github.com/myName/$1.git;
 			
  2. chmod 755 githubscript.sh
  3. nano ~/.profile;
@@ -229,6 +316,10 @@ Uninstall Brew
 			alias githubrepo="bash githubscript.sh"
  5. source ~/.bashrc ~/.profile; cd (to reload bash in termial) 
  6. Then use command githubrepo nameOfRepository
+ 7. Also make sure to put 
+  * source ~/.bashrc 
+ 	in the bottom of .bash_profile
+
 	
 # The Ultimate Method for creating a repository and pushing code to it 
  * githubrepo "name_for_repo" (Now it's created on github) 
@@ -237,7 +328,7 @@ Uninstall Brew
  * git init 
  * git add . 
  * git commit -m "Initial Commit"
- * git remote add origin https://github.com/btholmes/Demo.git (This only needs to be done on the inital creation) 
+ * git remote add origin https://github.com/myName/Demo.git (This only needs to be done on the inital creation) 
  * git push -u origin master
 	
 	
@@ -252,7 +343,7 @@ Uninstall Brew
 	
 ## Generating SSH keys
  * Check if you have one already with cat ~/.ssh/id_rsa.pub
- * If you don't have one, generate one with ssh-keygen -t rsa -C "btholmes@iastate.edu"
+ * If you don't have one, generate one with ssh-keygen -t rsa -C "myEmail@domain.com"
  * When prompted for location and file name just press enter
  * use this to change password ssh-keygen -p <keyname>
 	
@@ -308,6 +399,13 @@ Uninstall Brew
     Enter password
     cd <directory where you want to transfer the file>
     put <name of file you want to transfer>
+
+ * Copy from server to local 
+ 	get -R directory 
+ * Local commands 
+ 	lls
+ * Server commands 
+ 	ls 
     
     
 ## Make Android Studio Run Faster 
@@ -432,5 +530,92 @@ exit 0
 # See all wifi connection history on mac
 
 		defaults read /Library/Preferences/SystemConfiguration/com.apple.airport.preferences| sed 's|\./|`pwd`/|g' | sed 's|.plist||g'|grep 'LastConnected' -A 7
+
+
+# Set default text editor 
+	
+ * Open ~/.bashrc
+ 		
+ 		export EDITOR="path"
+ 		
+ 		
+# Display free disk space
+  * Get size of files in current directory 
+  		
+  			du -sh * 
+  
+  * Get free disk space 
+  		
+  		df -h
+
+  * Size of a single file 
+  		du -h
+
+# Use curl with redirects to download from sourceforge 
+
+		curl -L http://somewhere.com
+		
+		
+		
+# GMAIl server port info
+
+		Incoming Mail (IMAP) Server - Requires SSL
+		imap.gmail.com
+		Port: 993
+		Requires SSL:Yes
+
+		Incoming Mail (POP3) Server - requires SSL:
+		pop.gmail.com
+		Use SSL: Yes
+		Port: 995
+
+		Outgoing Mail (SMTP) Server - Requires TLS or SSL
+		smtp.gmail.com
+		Port: 465 or 587
+		Requires SSL: Yes
+		Requires authentication: Yes
+Use same settings as incoming mail server
+
+
+# Create a virtualenv in Python 
+	# Install pip
+	sudo easy_install pip
+# Install virtualenv 
+	python -m pip install --user virtualenv
+# Create virtual environment 
+	python -m virtualenv env
+
+# Activate virtual env
+	source env/bin/activate
+#  Deactivate
+	deactivate
+
+# Installing imports
+	pip install requests 
+	pip install package_name
+# Install all imports at once 
+	Add all your imports in a single txt file, say requirements.txt and every time you run 
+	your program on a new system, just do a
+
+ * pip install -r requirements.txt
+
+
+
+# Scan for open ports on network 
+		
+		nmap 192.168.1.1
+		hydra -l admin -P password.txt -v -f  192.168.1.1 ftp  // Could also use http-get
+
+# Generate a random mac adress 
+
+		openssl rand -hex 6 | sed ‘s/\(..\)/\1:/g; s/.$//’
+
+ * Change MAC address, must be disconnected from wifi networks for this to work (Press and hold option, then click wifi icon)
+		
+		sudo ifconfig en0 ether xx:xx:xx:xx:xx:xx
+
+
+# Selenium Webdriver with firefox
+ * brew install geckodriver
 
 
