@@ -418,7 +418,17 @@ Then create a master branch and push your new code .
 		Compile independent modules in parallel (may require larger heap size)
 		
 	Set VM Options to :
-		  -Xmx2048m -XX:MaxPermSize=512
+	 * Go to Help -> Custom VM Options
+	  - Add these lines
+	  //Sets heap size to 2 gb
+		  -Xmx2g 
+		  -XX:MaxPermSize=512
+
+    To confirm new heap size use at command line
+    	jps -lvm
+
+    To Show Heap allocation in bottom right corner
+    	Appearance -> click show memory indicator checkbox 
 		  
 		  
 # Find wifi password Windows and Mac
