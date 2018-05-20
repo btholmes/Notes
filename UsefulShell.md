@@ -2,6 +2,7 @@
 
 
 
+
 # Kali Linux Commands
 
 ## *************************************************************************************************
@@ -560,6 +561,15 @@ exit 0
 
   * Size of a single file 
   		du -h
+ 
+  * sudo fdisk -l shows more space than available 
+		resize2fs /dev/sda1
+
+  * Free reserved blocks for sudo
+		sudo tune2fs -m 0 /dev/sda1
+
+  * View reserved block space on mount 
+		sudo tune2fs -l /dev/sda1
 
 # Use curl with redirects to download from sourceforge 
 
