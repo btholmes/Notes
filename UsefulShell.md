@@ -7,6 +7,8 @@
 
 ## *************************************************************************************************
 
+ * Install GCC Linux 
+ 	sudo apt-get install build-essential
 
 ## PEN testing 
  * download device driver for host
